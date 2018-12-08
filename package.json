@@ -19,7 +19,8 @@
   "homepage": "https://github.com/null-br/react-study#readme",
   "dependencies": {
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "react-html-id": "^0.1.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
