@@ -11,10 +11,24 @@ class Users extends Component {
         { name: 'Tom', age: 38 },
       ]
     }
+    this.makeMeYouger = this.makeMeYouger.bind(this);
+  }
+
+  makeMeYouger() {
+    const temUsers = this.state.users.map((user) => {
+      const tempUser = user;
+      tempUser.age -= 10;
+      tempUser.age = tempUser.age > 0 ? tempUser.age : 0;
+      return tempUser;
+    });
+    this.setState({
+      temUsers
+    });
   }
   render(){
     return (
       <Fragment>
+        <div onClick={this.makeMeYouger}>click me become youger!</div>
         <div>{this.props.title}</div>
         {this.state.users.map((item) => {
           return (
