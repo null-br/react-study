@@ -60,7 +60,7 @@
 
 当`input中`有`value`的时候，要么加`onChange`事件，要么设置`readOnly={true}`
 
-##### 4.组件间的通信
+##### 4.组件间的通信（demo在ParentToChild文件夹下）
 
 1. 父子组件通信
 
@@ -71,9 +71,9 @@
    和父子组件一样，不同点是父组件里调子组件的时候，props通过`{...props}`传进去的
 
    ```jsx
-   // grandfarther
-   <Farther handleEvent={this.state.eventClick} title={this.state.title} />
-   // farther
+   // grandfather
+   <Father handleEvent={this.state.eventClick} title={this.state.title} />
+   // father
    <Child {...props} />
    // child
    const child = (props) => {
@@ -82,3 +82,17 @@
    ```
 
    ​
+
+3. 兄弟组件间通信（无redux的情况下）
+
+   - 通过共同的container，将所有的event handler传进去到共同父组件，父组件内部调子组件的时候在分别传不同的event handler
+
+   ​       子组件为纯函数，无状态（stateless）的组件，也就是它内部不维护状态，所有状态全部来自外部
+
+   - 没有共同container的兄弟组件通信：订阅发布模式，实现方法参考
+     - [订阅发布模式](https://vmo-fed.github.io/js-design-pattern/publish-subscribe-pattern/)
+     - [订阅发布模式实现事件总线](https://vmo-fed.github.io/js-design-pattern/use-publish-subscribe-pattern/)
+
+##### 5.删除list中的某一项（demo在ListsAndKeys文件夹下）
+
+使用了`react-html-id`第三方的库生成独一无二的id，以及用`findIndex`找到当前的index，删除用了slice，上述所有操作均在父组件完成
