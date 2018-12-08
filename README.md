@@ -96,3 +96,9 @@
 ##### 5.删除list中的某一项（demo在ListsAndKeys文件夹下）
 
 使用了`react-html-id`第三方的库生成独一无二的id，以及用`findIndex`找到当前的index，删除用了slice，上述所有操作均在父组件完成
+
+##### 6.Fragment用法（React version >= 16）
+
+- 包裹元素，渲染时会remove掉自己，不在html中显示
+- 将html 标签显示在页面上时可以使用Fragment来包裹
+- [详细资料](https://vmo-fed.github.io/react/react-Fragments/)
