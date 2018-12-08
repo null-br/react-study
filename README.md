@@ -6,10 +6,11 @@
 
  Users VS User 分别由React class 和 es6 function定义组件，二者区别如下
 
- （1）前者需要引Component，后者不需要
- （2）前者需要render，后者不需要
- （3）前者props是自动有效的，通过this.props直接调用，后者要传给匿名函数作为参数
- （4）有state的时候使用前者，纯函数使用后者
+- 前者需要引Component，后者不需要
+- 前者需要render，后者不需要
+- 前者props是自动有效的，通过this.props直接调用，后者要传给匿名函数作为参数
+- 有state的时候使用前者，纯函数使用后者
+
  任何组件的attribute都是挂载在props，attribute可以是加法，变量，字符串，数字，三元表达式，但是不能是loop，attribute不能定义为for和class，因为jsx不允许,组件里包含的内容，都挂载在props.children下
 
  ```jsx
@@ -38,8 +39,8 @@
 
 2. setState的同步异步问题：
 
-   1. 在React生命周期或者React event handler 是异步
-   2. 延时回调或者原生事件，不一定是异步，因为没有经过react的事物流（多次setState合并成一次改变）
+   - 在React生命周期或者React event handler 是异步
+   - 延时回调或者原生事件，不一定是异步，因为没有经过react的事物流（多次setState合并成一次改变）
 
 #####  3.两种事件传参数的调用方式：demo在ReactEventAndTwoWayDataBinding文件下
 
@@ -58,3 +59,26 @@
    ```
 
 当`input中`有`value`的时候，要么加`onChange`事件，要么设置`readOnly={true}`
+
+##### 4.组件间的通信
+
+1. 父子组件通信
+
+   props，父组件通过props将state或者event handler传给子组件，在子组件中触发event handler，然后在父组件中调对应的方法执行，最后将改变后的state值传给子组件
+
+2. 祖父组件，父组件，子组件通信
+
+   和父子组件一样，不同点是父组件里调子组件的时候，props通过`{...props}`传进去的
+
+   ```jsx
+   // grandfarther
+   <Farther handleEvent={this.state.eventClick} title={this.state.title} />
+   // farther
+   <Child {...props} />
+   // child
+   const child = (props) => {
+     <div onClick={props.handleEvent.bind(this)}>{props.title}</div> // title,handleEvent均来自祖父组件
+   }
+   ```
+
+   ​
