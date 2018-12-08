@@ -25,17 +25,12 @@ class ReactEventAndTwoWayDataBinding extends Component {
         <br/>
         <br/>
         <button onClick={this.changeName.bind(this, 'BR is sad')}>change state use bind Function</button>
-        <br/>
-        <br/>
+        <p>使用bind</p>
         <input type="text" onChange={this.changeNameWithInput.bind(this)} value={this.state.name}/>
-        <br/>
-        <br/>
+        <p>使用匿名函数</p>
         <input type="text" onChange={(e) => this.changeNameWithInput(e)} value={this.state.name}/>
-        <br/>
-        <br/>
+        <p>只读：</p>
         <input type="text" value={this.state.name} readOnly={true}/>
-        <br/>
-        <br/>
         <div>{this.state.name}</div>
       </Fragment>
     )
