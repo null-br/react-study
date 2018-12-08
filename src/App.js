@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import ListsAndKeys from "./components/ListsAndKeys/Index";
-import Index from './components/ReactClassVSFuncComponents/Index';
-// import ReactEventAndTwoWayDataBinding from './components/ReactEventAndTwoWayDataBinding/ReactEventAndTwoWayDataBinding';
-// import Parent from './components/ParentToChild/parent'
+// import Index from "./components/ListsAndKeys/Index";
+// import Index from './components/ReactClassVSFuncComponents/Index';
+// import Index from './components/ReactEventAndTwoWayDataBinding/Index';
+import Index from './components/ParentToChild/IndexSibling';
 
 class App extends Component {
   // constructor(props) {
@@ -16,18 +16,6 @@ class App extends Component {
   //       { id: this.nextUniqueId(), name: 'jim', age: 34 },
   //     ]
   //   }
-  // }
-
-  /*doSomeThing(val) {
-    this.setState({
-      title: val,
-    });
-  }*/
-
-  // changeTheWorld(val) {
-  //   this.setState({
-  //     title: val,
-  //   });
   // }
 
   delUserName(index, e) {
@@ -56,14 +44,6 @@ class App extends Component {
       <div>
         <Index/>
         {/*<ReactEventAndTwoWayDataBinding />*/}
-
-        {/*<p>grandFather, father and child communicate</p>*/}
-        {/*<Parent title={this.state.title} doSomeThing={this.doSomeThing.bind(this, 'new world')}/>*/}
-
-        {/*<p>siblings communicate</p>*/}
-        {/*<Parent title={this.state.title}*/}
-                {/*changeTheWorldEvent={this.changeTheWorld.bind(this, 'new world')}*/}
-                {/*keepTheWorldSameEvent={this.changeTheWorld.bind(this, 'same world')}/>*/}
       </div>
     )
   }
