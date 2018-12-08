@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ListsAndKeys from "./components/ListsAndKeys/Index";
-// import Users from './components/ReactClassVSFuncComponents/Users';
+// import ListsAndKeys from "./components/ListsAndKeys/Index";
+import Index from './components/ReactClassVSFuncComponents/Index';
 // import ReactEventAndTwoWayDataBinding from './components/ReactEventAndTwoWayDataBinding/ReactEventAndTwoWayDataBinding';
 // import Parent from './components/ParentToChild/parent'
 
@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/*<Users title="this is Users title from app" />*/}
+        <Index/>
         {/*<ReactEventAndTwoWayDataBinding />*/}
 
         {/*<p>grandFather, father and child communicate</p>*/}
@@ -64,8 +64,6 @@ class App extends Component {
         {/*<Parent title={this.state.title}*/}
                 {/*changeTheWorldEvent={this.changeTheWorld.bind(this, 'new world')}*/}
                 {/*keepTheWorldSameEvent={this.changeTheWorld.bind(this, 'same world')}/>*/}
-
-        <ListsAndKeys />
       </div>
     )
   }
