@@ -144,3 +144,137 @@
 
 - (5) componentWillUnmount: 销毁的时候执行，我们可以在这里清除一些计数器
 
+##### 8.Pure Components（demo参考PureComponents文件夹）
+
+理解Pure Components在re-render过程中的作用
+
+setState有个特点：只有调用了这个方法，就会re-render component，它不会检查value的值有没有改变，为了防止value一样的时候还会render，我们可以采用下面的方法：
+
+- （1）shouldComponentUpdate
+- （2）PureComponent：浅拷贝，所以只适合只有一个叶子组件的情况，如果我们setState传多维数组，一维相同的时候会认为组件没有变换，所以我们一般不要用PureComponent
+
+##### 9.React router（demo在ReactRouter中）
+
+使用的npm包有`react-router-dom`
+
+```jsx
+import { BrowserRouter as Router, Route, Link, NavLink, Redirect, Prompt } from 'react-router-dom'; // 用来包裹最外层element
+// import Route from 'react-router-dom/Route'; // 提供route tag，必须用一个element将所有Route包裹起来
+
+// 常见Route的写法
+// exact 匹配 '/about' 或者 '/about/' 不匹配 '/'，strict 严格匹配'/about/',不匹配'/about'
+<Route path="/about/" exact strict render={
+    () => {
+      return (<h1>welcome About</h1>);
+    }
+  } />
+
+<Route path="/user" exact component={User} />
+<Route path="/user/:username" component={User} /> // 获取username的值：match.params.username
+
+// 	模拟是否登录的场景，获取username的值：{username}
+<Route path="/user/:username" exact strict render={({match}) => (
+    this.state.loggedIn ? (<User username={match.params.username}/>) : (<Redirect to="/" />)
+  )} />
+
+// Link can't add activeStyle but NavLink
+<Link to="/" exact>Home</NavLink>
+<NavLink to="/" activeStyle={{color: 'green'}} exact>Home</NavLink>
+
+// Prompt 用法，true表示不弹出提示框
+<Prompt
+  when={!this.state.loggedIn}
+  message={(location) => {
+    return location.pathname.startsWith('/user') ? 'Are u sure?' : true;
+  }}
+  />
+```
+
+##### 10.React Refs and DOM（demo见RefsAndDOM）
+
+旧版ref直接赋值，现在已经废弃
+
+现在采用`<input type="text" ref={(input) => {this.firstName = input}} />`这种回调的方式赋值
+
+行参input是input元素（`<input type="text"`>）
+
+该回调在componentDidMount前调用render后调用。如下图所示
+
+[!img](./src/images/refs.png)
+
+re-render的时候，ref中的回调连续执行2次
+
+两种类型组件的调用方式：
+
+- class 组件：直接使用this.XXX
+
+- stateless Func：
+
+  - 要操作的DOM和触发事件的元素在一个Function中
+
+    ```jsx
+    const fn = () => {
+      let elRef = null;
+      const onClick = () => {
+        elRef.focus();
+      }
+      return (
+      	<div>
+        	<input ref={(input) => {elRef = input}} />
+          	<input
+              type="submit"
+              value="submit"
+              onClick={onClick} />
+        </div>
+      );
+    }
+    ```
+
+    ​
+
+  - 要操作的DOM和触发事件的元素不在一个Function中，父子关系，采用props关系，注意这里myFn中相当于调用了fn中的`{(input) => {elRef = input}}`回调函数，这样我们就实现了在父组件中调用子组件的DOM
+
+  ```jsx
+  const fn = () => {
+    let elRef = null;
+    const onClick = () => {
+      elRef.focus();
+    }
+    return (
+    	<div>
+      	<myFn elRef={(input) => {elRef = input}} />
+        	<input
+            type="submit"
+            value="submit"
+            onClick={onClick} />
+      </div>
+    );
+  }
+
+  const myFn = (props) => {
+    return (
+    	<input ref={props.elRef} />
+    );
+  }
+  ```
+
+  ##### 11.prop-types：检查类型的几种常用用法（demo见PropTypes）
+
+  ```jsx
+  import PropTypes from 'prop-types';
+  const Demo = () => {}
+  Demo.propTypes = {
+    str: PropTypes.string.isRequired,
+    bool: PropTypes.bool,
+    strOrNum: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    arr: PropTypes.arrayOf(PropTypes.number),
+    arrOfObj: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      age: PropTypes.number,
+    })),
+    // children: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.element,
+  }
+  ```
+
+  ​
