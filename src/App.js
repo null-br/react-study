@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 // import Index from './components/ParentToChild/IndexSibling';
 // import Index from './components/LifeCycle/Index';
 // import Index from './components/PureComponents/Index';
-import Index from './components/ReactRouter/Index';
+// import Index from './components/ReactRouter/Index';
+import Index from './components/RefsAndDOM/Index';
 
 class App extends Component {
   render() {
