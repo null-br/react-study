@@ -287,3 +287,18 @@ re-render的时候，ref中的回调连续执行2次
 
   和props-types比较可以检测更多的类型，package.json的script中添加一个`"flow": "flow"`，初始化执行`npm run flow init`生成一个.flowconfig文件，具体用法[参考官网](https://flow.org/en/docs/usage/)
 
+##### 13.react typeScript（demo见react-typescript）
+
+[create-react-app]脚手架里面集成了typescript，用来检查类型，用法[见官网](https://github.com/Microsoft/TypeScript-React-Starter)
+
+```jsx
+// 使用interface 注意第一个字母必须为大写字母I
+export interface IMyClassProps {
+    name?: string;
+    age: number;
+    isLived?: boolean;
+    kids?: 1 | 2;
+    livedIn?: ['BeiJing', 'HangZhou']
+}
+```
+
