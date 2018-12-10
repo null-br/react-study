@@ -4,7 +4,9 @@
   "description": "study react with me!",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,6 @@
   },
   "homepage": "https://github.com/null-br/react-study#readme",
   "dependencies": {
-    "pro": "^0.3.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -29,6 +30,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "flow-bin": "^0.87.0",
     "parcel-bundler": "^1.10.3"
   }
 }

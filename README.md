@@ -260,6 +260,8 @@ re-render的时候，ref中的回调连续执行2次
 
   ##### 11.prop-types：检查类型的几种常用用法（demo见PropTypes）
 
+  特点是轻量
+
   ```jsx
   import PropTypes from 'prop-types';
   const Demo = () => {}
@@ -277,4 +279,11 @@ re-render的时候，ref中的回调连续执行2次
   }
   ```
 
-  ​
+  ##### 12.flow-bin （demo见flowBin）
+
+  - --save-dev（--D）：devDependencies，devDependencies  里面的插件只用于开发环境，不用于生产环境
+  -  --save（--S）:dependencies，而 dependencies  是需要发布到生产环境的
+  - [参考](https://blog.csdn.net/zDeer520/article/details/73431295)
+
+  和props-types比较可以检测更多的类型，package.json的script中添加一个`"flow": "flow"`，初始化执行`npm run flow init`生成一个.flowconfig文件，具体用法[参考官网](https://flow.org/en/docs/usage/)
+

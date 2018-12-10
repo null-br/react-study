@@ -7,7 +7,8 @@ import React, { Component } from 'react';
 // import Index from './components/PureComponents/Index';
 // import Index from './components/ReactRouter/Index';
 // import Index from './components/RefsAndDOM/Index';
-import Index from './components/PropTypes/Index';
+// import Index from './components/PropTypes/Index';
+import Index from './components/Flow/Index';
 
 class App extends Component {
   render() {
