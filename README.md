@@ -287,18 +287,51 @@ re-render的时候，ref中的回调连续执行2次
 
   和props-types比较可以检测更多的类型，package.json的script中添加一个`"flow": "flow"`，初始化执行`npm run flow init`生成一个.flowconfig文件，具体用法[参考官网](https://flow.org/en/docs/usage/)
 
-##### 13.react typeScript（demo见react-typescript）
+  ##### 13.react typeScript（demo见react-typescript）
 
-[create-react-app]脚手架里面集成了typescript，用来检查类型，用法[见官网](https://github.com/Microsoft/TypeScript-React-Starter)
+  [create-react-app]脚手架里面集成了typescript，用来检查类型，用法[见官网](https://github.com/Microsoft/TypeScript-React-Starter)
 
-```jsx
-// 使用interface 注意第一个字母必须为大写字母I
-export interface IMyClassProps {
-    name?: string;
-    age: number;
-    isLived?: boolean;
-    kids?: 1 | 2;
-    livedIn?: ['BeiJing', 'HangZhou']
-}
-```
+  ```jsx
+  // 使用interface 注意第一个字母必须为大写字母I
+  export interface IMyClassProps {
+      name?: string;
+      age: number;
+      isLived?: boolean;
+      kids?: 1 | 2;
+      livedIn?: ['BeiJing', 'HangZhou']
+  }
+  ```
 
+  ##### 14.HOC（HigherOrderComponents）高阶组件
+
+  demo见HigherOrderComponents文件，styles文件，HOC文件
+
+  [React官网关于HOC的文档](https://reactjs.org/docs/higher-order-components.html)
+
+  一句话说清楚HOC：它是一个函数，可以接受一个组件作为参数，对这个组件进行一些逻辑操作，然后返回新的组件。
+
+  它是一种重用组件逻辑的思想，不属于React API。
+
+  下面的写法是一种HOC模式
+
+  ```jsx
+  // HOC.js
+  // 匿名函数接收一个组件作为参数（形参WrappedComponent）
+  // 形参args是形参WrappedComponent代表的组件的props
+  export default (WrappedComponent) => {
+    return (args) => {
+      return WrappedComponent(transProps(args));
+    }
+  };
+
+  // 其他文件中调用方式
+  import HOC from './HOC.js';
+  class User extends Components {}
+  export default HOC(User);
+  ```
+
+  ​
+
+  ​
+
+  ​
