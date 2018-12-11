@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+ul > li {
+  list-style-type: none;
+  border: 1px solid #f9e5ad;
+  margin: 10px;
+  padding-top: 10px;
+  background-bottom: 10px;
+  background-color: #f7e8bc70;
+}

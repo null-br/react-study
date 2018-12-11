@@ -9,7 +9,10 @@ import React, { Component } from 'react';
 // import Index from './components/RefsAndDOM/Index';
 // import Index from './components/PropTypes/Index';
 // import Index from './components/Flow/Index';
-import Index from './components/HigherOrderComponents/Index';
+// import Index from './components/HigherOrderComponents/Index';
+// import Index from './components/Redux/ReactWithReduxSimple';
+import Index from './components/Redux/ReactWithReduxComplex';
+import './App.css';
 
 class App extends Component {
   render() {

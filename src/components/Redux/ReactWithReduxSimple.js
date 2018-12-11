@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
     onAgeDown: () => dispatch({type: 'AGE_DOWN'}),
   }
 };
-class Index extends Component {
+class ReactWithReduxSimple extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,4 +28,4 @@ class Index extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Index);
+)(ReactWithReduxSimple);

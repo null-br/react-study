@@ -282,7 +282,7 @@ re-render的时候，ref中的回调连续执行2次
   ##### 12.flow-bin （demo见flowBin）
 
   - --save-dev（--D）：devDependencies，devDependencies  里面的插件只用于开发环境，不用于生产环境
-  -  --save（--S）:dependencies，而 dependencies  是需要发布到生产环境的
+  - --save（--S）:dependencies，而 dependencies  是需要发布到生产环境的
   - [参考](https://blog.csdn.net/zDeer520/article/details/73431295)
 
   和props-types比较可以检测更多的类型，package.json的script中添加一个`"flow": "flow"`，初始化执行`npm run flow init`生成一个.flowconfig文件，具体用法[参考官网](https://flow.org/en/docs/usage/)
@@ -330,11 +330,11 @@ re-render的时候，ref中的回调连续执行2次
   export default HOC(User);
   ```
 
-  ##### 15.Redux
+  ##### 15.Redux（demo见Redux/ReduxWithOutReact）
 
   1. Redux是什么？
 
-  ​	Redux是独立的，可以使用在各种框架中，是为了解决状态统一管理而产生的。
+    ​Redux是独立的，可以使用在各种框架中，是为了解决状态统一管理而产生的。
 
   2. 我们为什么要在React中使用Redux？
 
@@ -354,10 +354,12 @@ re-render的时候，ref中的回调连续执行2次
 
      ```jsx
      // Action
-     {
+     const actionObjAdd = {
        type: "INCE",
        val: 21,
      }
+     // 触发action
+     store.dispatch(actionObjAdd);
      ```
 
      （2）store:：由state和reducer组成
@@ -394,6 +396,86 @@ re-render的时候，ref中的回调连续执行2次
 
      （3）更新UI：发布订阅模式
 
+     ```jsx
+     store.subscribe(() => {
+       console.log('subscribe: ' + JSON.stringify(store.getState()));
+     });
+     ```
+
+     ​
+
+     #####16.React中使用Redux（demo见Redux/Index）
+
+     Redux在React中的工作原理：
+
+     （1）将local state替换成global state，将store挂在顶级组件下可以实现
+
+     ```jsx
+     import React from 'react';
+     import { createStore } from 'redux';
+     import { Provider } from 'react-redux';
+     import ReactDOM from 'react-dom';
+     import App from './src/App';
+     import reducer from './src/Store/reducer';
+
+     const store = createStore(reducer);
+
+     ReactDOM.render(
+       <Provider store={store}> /*这一行代码是将store全局注入*/
+         <App/>
+       </Provider>,
+       document.getElementById('app')
+     );
+
+     ```
+
+     ​
+
+     （2）将redux的action和redux的state分别映射到props，这么做是为了方便组件获取变量和事件获取值，（因为我们不能使用local state，所以使用props）
+
+     ```jsx
+     // dispatch action
+     const mapDispatchToProps = (dispatch) => {
+       return {
+         onAgeUp: () => dispatch({type: 'AGE_UP'}),
+         onAgeDown: () => dispatch({type: 'AGE_DOWN'}),
+       }
+     };
+
+     // 将redux中的state添加到props
+     const mapStateToProps = (state) => ({
+       age: state.age,
+     });
+     ```
+
+     上面的两个变量如何与store联系起来？我们通过connect，connect来自react-redux，接收2个mapStateToProps, mapDispatchToProps两个变量，connect()是一个HOC，通过connect()，我们实现了为每个组件dispatch action 和subscribe state的功能。
+
+     ```jsx
+     import { connect } from 'react-redux';
+     class App extend Componemt {}
+
+     export default connect(mapStateToProps, mapDispatchToProps)(App);
+     ```
+
+     ​
+
+     connect为我们把redux 的store.dispatch({})和store.subscribe(() => {})的功能集成在了react中，我们无需显式调用
+
   ​
 
   ​
+
+  ​
+
+  ​
+
+  ​
+
+  ​
+
+  ​
+
+  ##### 番外篇（如何踩坑，爬坑篇 ）：
+
+  1. 项目中支持unexpected token spread operator 的解决方案，参考https://stackoverflow.com/questions/33745118/browserify-babel-6-gulp-unexpected-token-on-spread-operator
+
