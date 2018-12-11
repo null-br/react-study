@@ -12,7 +12,7 @@ import './App.css';
 // import Index from './components/Flow/Index';
 // import Index from './components/HigherOrderComponents/Index';
 // import Index from './components/Redux/ReactWithReduxSimple';
-// import Index from './components/Redux/ReactWithReduxComplex's;
+// import Index from './components/Redux/ReactWithReduxComplex';
 import Index from './components/Redux/ReduxCombineMultipleReducers';
 
 class App extends Component {
