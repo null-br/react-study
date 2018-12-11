@@ -16,3 +16,8 @@ ul > li {
   background-bottom: 10px;
   background-color: #f7e8bc70;
 }
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

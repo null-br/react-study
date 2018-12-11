@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-class ndexLocalState extends Component {
+class IndexLocalState extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,13 +11,13 @@ class ndexLocalState extends Component {
   }
   addUp() {
     this.setState({
-      // ...state,
+      ...this.state,
       age: ++this.state.age,
     });
   }
   addDown() {
     this.setState({
-      // ...state,
+      ...this.state,
       age: --this.state.age,
     });
   }
@@ -32,4 +32,4 @@ class ndexLocalState extends Component {
   }
 }
 
-export default ndexLocalState;
+export default IndexLocalState;

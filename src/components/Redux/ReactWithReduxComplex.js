@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
+import { AGE_UP, AGE_DOWN, DEL_ITEM } from '../../constants';
 
 const mapStateToProps = (state) => ({
   age: state.age,
@@ -9,15 +10,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return ({
     onAgeUp: () => dispatch({
-      type: 'AGE_UP',
+      type: AGE_UP,
       val: 1,
     }),
     onAgeDown: () => dispatch({
-      type: 'AGE_DOWN',
+      type: AGE_DOWN,
       val: 1,
     }),
     onDelItem: (id) => dispatch({
-      type: 'DEL_ITEM',
+      type: DEL_ITEM,
       key: id,
     })
   });
