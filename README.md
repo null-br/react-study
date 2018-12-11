@@ -330,7 +330,69 @@ re-render的时候，ref中的回调连续执行2次
   export default HOC(User);
   ```
 
-  ​
+  ##### 15.Redux
+
+  1. Redux是什么？
+
+  ​	Redux是独立的，可以使用在各种框架中，是为了解决状态统一管理而产生的。
+
+  2. 我们为什么要在React中使用Redux？
+
+     因为在React中state是通过props传递的，当组件简单的时候管理state还不算复杂，当我们的项目达到一定的量级的时候，两种类型的组件：
+
+  （1）嵌套组件：通过props从顶层传递，一直到最底层
+
+  （2）不同页面的组件相互通信：需要一个共同的容器包裹起来，然后把状态放在这个容器中
+
+  以上方法都会使得我们的状态可读性变差，又不好管理，如果我们使用一种全局存储state的模式就可以很好的解决这些问题。
+
+  3. Redux的组成
+
+     （1）Action：我们可以将它理解为一个命令，执行这个命令返回一个对象并将这个对象传给Reducer，
+
+     ​	这个对象返回type，可以理解为命令的名称，然后再返回一个用来更新state的新值 val（这个变量名可以随便取）
+
+     ```jsx
+     // Action
+     {
+       type: "INCE",
+       val: 21,
+     }
+     ```
+
+     （2）store:：由state和reducer组成
+
+      - state是一个全局对象，它只能通过reducer改变
+
+     ```jsx
+     // state
+     state = {
+       age: 20,
+     }
+     ```
+
+     ​
+
+     - reducer是一个更新state的函数，它只能通过Action触发，接受一个Action对象和state，然后返回新的state
+
+       - reducer发生了什么？
+
+         （1）从Action拿到返回值，检查type是否为reducer中定义的类型
+
+         （2）获取并复制当前state（我们不希望对state直接操作，所以复制state）
+
+         （3）将Action中的val给state，返回新的state
+
+     ```jsx
+     // reducer
+     if (action.type === 'INCE') {
+       return {
+         age: action.val,
+       }
+     }
+     ```
+
+     （3）更新UI：发布订阅模式
 
   ​
 
