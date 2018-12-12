@@ -6,12 +6,16 @@ import App from './src/App';
 // import reducer from './src/Store/reducer';
 // import reducer from './src/Store/reducerAB';
 import * as reducer from './src/Store/index';
-import reducerA from '/src/Store/reducerA';
-import reducerB from '/src/Store/reducerB';
+// import reducerA from '/src/Store/reducerA';
+// import reducerB from '/src/Store/reducerB';
 
+// const rootStore = combineReducers({
+//   rA: reducerA,
+//   rB: reducerB,
+// });
 const rootStore = combineReducers({
-  rA: reducerA,
-  rB: reducerB,
+  rA: reducer.reducerA,
+  rB: reducer.reducerB,
 });
 
 const store = createStore(rootStore);
