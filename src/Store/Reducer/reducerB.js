@@ -1,4 +1,4 @@
-import { UPDATA_B } from '../constants';
+import { UPDATA_B } from '../../constants';
 const initialState = {
   a: 1,
   b: 1,

@@ -2,6 +2,12 @@
 
 ### react-study
 
+学习一个东西从两方面入手：
+
+（1）这个东西是什么？
+
+（2）这个东西解决了什么问题？
+
 #### 1. 两种定义组件的方式：ReactClassVSFuncComponents夹下
 
  Users VS User 分别由React class 和 es6 function定义组件，二者区别如下
@@ -497,7 +503,100 @@ re-render的时候，ref中的回调连续执行2次
   });
   ```
 
+  ##### 18.applyMiddleware（demo见ReactReduxMiddleware）
+
+  redux对于Middleware的[解释](https://www.redux.org.cn/docs/advanced/Middleware.html)是**它提供的是位于 action 被发起之后，到达 reducer 之前的扩展点**
+
+  redux库提供了一个方法叫applyMiddleware，`import { applyMiddleware } from 'redux';`这个方法为我们封装了包括dispatch action（调用action）和catch action（捕获action）；
+
+  下面是applyMiddleware工作的大致流程：
+
+  场景：假设我们点击一个按钮，然后更新UI
+
+  （1）点击按钮在applyMiddleware中先dispatch action， 然后catch action
+
+  （2）对action中的值做一些操作，比如将其payload存在服务器）
+
+  （3）action返回给Reducer
+
+  没有applyMiddleware之前，我们是直接将action返回给Reducer，现在对action里的值做了一些操作。
+
+  一个简单的使用applyMiddleware的例子：
+
+  ```jsx
+  // Index.js
+  import { createStore, applyMiddleware } from 'redux';
+  const reducer from './strore/reducer'
+
+  const myMiddleware = (store) => {
+    // applyMiddleware dispatch action and catch action, we do some operate and return action
+    // store is {getState: f, dispatch: f}
+    return next => { // first we set dispatch as argument, we want to dispatch action
+      return action => { // second we set action as argument
+        // u can do some operate for action at here
+        return next(action); // third we dispatch action
+      }
+    }
+  }
+
+  const store = createStore(reducer, applyMiddleware(myMiddleware));
+  ```
+
   ​
+
+  #####19. thunk（demo见ReactReduxThunk）
+
+  thunk: 在js中的意思是把一个功能用函数包装起来，当调用这个函数的时候，返回并执行这个功能，举个例子：
+
+  ```jsx
+  // 直接执行功能
+  const result = {age: 21};
+  // thunk
+  const thunk = () => {
+    const result = {age: 21};
+    return result;
+  }
+
+  thunk(); // 此时才会执行
+  ```
+
+  我们为什么要用thunk？
+
+  为了在action中进行异步操作，我们需要中间件，手写的中间件参考第18节，在react中我们使用`import thunk from 'redux-thunk';`作为中间件，将action单独到一个文件，伪代码如下：
+
+  ```jsx
+  // 异步调用的模版
+  // action.js
+  export const loading = () => {
+    return {
+      type: 'LOADING'
+    }
+  }
+  export const ageUp = val => {
+    return dispatch => {
+      dispatch(loading()); // we add loading logo
+      setTimeout(() => {
+        dispatch({
+          type: 'AGE_UP',
+          val: val,
+        });
+      }, 5000);
+    }
+  };
+
+  // reducer.js
+  export const reducer = (state = initialState, action) => {
+    ...
+    if (action.type === 'AGE_UP') {
+      ...
+      return {
+        ...state,
+        age: ...,
+        loading: false,    // we cancel loading logo at here
+      }
+    }
+  }
+  ```
 
   ​
 

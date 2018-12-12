@@ -14,7 +14,8 @@ import './App.css';
 // import Index from './components/Redux/ReactWithReduxSimple';
 // import Index from './components/Redux/ReactWithReduxComplex';
 // import Index from './components/Redux/ReduxCombineMultipleReducers';
-import Index from './components/Redux/ReactReduxMiddleware';
+// import Index from './components/Redux/ReactReduxMiddleware';
+import Index from './components/Redux/ReactReduxThunk';
 
 class App extends Component {
   render() {
