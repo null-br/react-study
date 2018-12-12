@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { AGE_UP, AGE_DOWN, DEL_ITEM } from '../../constants';
 
 const mapStateToProps = (state) => ({
-  age: state.age,
-  history: state.history,
+  age: state.reducerAge.age,
+  history: state.reducerAge.history,
 });
 
 const mapDispatchToProps = (dispatch) => {

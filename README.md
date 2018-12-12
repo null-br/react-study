@@ -463,6 +463,40 @@ re-render的时候，ref中的回调连续执行2次
 
   ​
 
+  ##### 17. 合并多个reducer（demo见ReduxCombineMultipleReducers）
+
+  使用combineReducers，伪代码如下：
+
+  ```jsx
+  // ./src/Store/index.js
+  import reducerA from "./reducerA";
+  import reducerB from "./reducerB";
+  export {
+    reducerA,
+    reducerB
+  }
+
+  // Index.js
+  import {
+    createStore,
+    combineReducers,
+  } from 'redux';
+
+  import * as reducer from './src/Store/index'; // 将所有reducer引到index下
+
+  const rootStore = combineReducers({
+    ...reducer,
+  });
+
+  const store = createStore(rootStore);
+
+  // 在组件中获取值
+  const mapStateToProps = (state) => ({
+    a: state.reducerA.a,
+    b: state.reducerB.b,
+  });
+  ```
+
   ​
 
   ​
@@ -478,4 +512,3 @@ re-render的时候，ref中的回调连续执行2次
   ##### 番外篇（如何踩坑，爬坑篇 ）：
 
   1. 项目中支持unexpected token spread operator 的解决方案，参考https://stackoverflow.com/questions/33745118/browserify-babel-6-gulp-unexpected-token-on-spread-operator
-

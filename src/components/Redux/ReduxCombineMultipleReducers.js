@@ -14,8 +14,8 @@ import {combineReducers} from "redux";
 // 在./index.js rootStore中
 // 这里我们可以这样理解：combineReducers将多个reducer的state合并成一个，合并后的对象为state = {rA: reducerA, rB: reducerB}
 const mapStateToProps = (state) => ({
-  a: state.rA.a,
-  b: state.rB.b,
+  a: state.reducerA.a,
+  b: state.reducerB.b,
 });
 
 const mapDispatchToProps = (dispatch) => {

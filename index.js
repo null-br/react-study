@@ -1,24 +1,33 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+} from 'redux';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import App from './src/App';
 // import reducer from './src/Store/reducer';
 // import reducer from './src/Store/reducerAB';
 import * as reducer from './src/Store/index';
-// import reducerA from '/src/Store/reducerA';
-// import reducerB from '/src/Store/reducerB';
 
-// const rootStore = combineReducers({
-//   rA: reducerA,
-//   rB: reducerB,
-// });
 const rootStore = combineReducers({
-  rA: reducer.reducerA,
-  rB: reducer.reducerB,
+  ...reducer,
 });
 
-const store = createStore(rootStore);
+const logAction = store => {
+  console.log(store);
+  // applyMiddleware dispatch action and catch action, we do some operate and return action
+  return dispatch => {
+    console.log(dispatch);
+    return action => {
+      const result = dispatch(action);
+      console.log(action);
+      console.log(result);
+    }
+  }
+};
+const store = createStore(rootStore, applyMiddleware(logAction));
 
 ReactDOM.render(
   <Provider store={store}>

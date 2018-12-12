@@ -6,11 +6,11 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAgeUp: () => dispatch({type: 'AGE_UP'}),
-    onAgeDown: () => dispatch({type: 'AGE_DOWN'}),
+    onAgeUp: () => dispatch({type: 'AGE_UP', val: 1}),
+    onAgeDown: () => dispatch({type: 'AGE_DOWN', val: 1}),
   }
 };
-class ReactWithReduxSimple extends Component {
+class ReactReduxMiddleware extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,4 +28,4 @@ class ReactWithReduxSimple extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ReactWithReduxSimple);
+)(ReactReduxMiddleware);
