@@ -648,7 +648,7 @@ re-render的时候，ref中的回调连续执行2次
 
   Lazy组件的生命周期：
 
-  ![生命周期]('./src/images/lazy.png')
+  ![img](./src/images/lazy.png)
 
   ##### 22. React Hooks（demo见Hook）
 
