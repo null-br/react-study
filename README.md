@@ -122,7 +122,7 @@
 
 - （3）render：在componentWillMount之后执行，当state或者props改变的时候会re-render，所以在这里不能使用setState，如果我们有一个component tree，render的时候是从sub component（顶级组件）开始依次向children component分别调用constructor =>> componentWillMount =>> render，直到sub component finish rendering
 
-- （4）componentDidMount：在render之后执行，只执行一次，如果有一个组件树，那么执行子组件的生命周期从父组件的render开始，直到子组件生命周期执行完毕才会执行父组件的componentDidMount，如下图所示[!img](./src/images/lifeCycle.png)
+- （4）componentDidMount：在render之后执行，只执行一次，如果有一个组件树，那么执行子组件的生命周期从父组件的render开始，直到子组件生命周期执行完毕才会执行父组件的componentDidMount，如下图所示![img](./src/images/lifeCycle.png)
 
   - 我们可以在这里调用AJAX请求
   - 在这里创建发布订阅（在componentDidUnmount中要取消订阅）
@@ -142,7 +142,9 @@
 
   - （3）componentWillUpdate:  如果想定义一些变量基于state和props的变量，那么可以在这里定义，这里不可以使用setState，会重复re-render的过程，陷入死循环。
 
-  - （4）componentDidUpdate：创建第三方UI库的 elements
+  - （4）render
+
+  - （5）componentDidUpdate：创建第三方UI库的 elements
 
     ```jsx
     componentDidUpdate(nextProps, nextState) {}
@@ -206,7 +208,7 @@ import { BrowserRouter as Router, Route, Link, NavLink, Redirect, Prompt } from 
 
 该回调在componentDidMount前调用render后调用。如下图所示
 
-[!img](./src/images/refs.png)
+![img](./src/images/refs.png)
 
 re-render的时候，ref中的回调连续执行2次
 
@@ -598,9 +600,77 @@ re-render的时候，ref中的回调连续执行2次
   }
   ```
 
-  ​
+  React 16.6.0新添加的功能https://reactjs.org/blog/2018/10/23/react-v-16-6.html
+
+  #####20.Memo（demo见Memoize）
+
+  解决props相同的时候，setState会rerender组件的问题，官网对它的解释是 A form of PureComponent/shouldComponentUpdate for function components。
+
+  用memo生成的组件渲染时间和普通组件无异，在render之后，但是注意这种组件没有生命周期
+
+  使用：
+
+  ```jsx
+  const MemoComp = React.memo((props) => {
+    /* only rerenders if props change */
+    console.log('MyComponent');
+    return (
+      <div>
+        {props.age}
+      </div>
+    );
+  });
+  ```
 
   ​
+
+  ##### 21.Lazy， Suspense（demo见LazyComponent）
+
+  懒加载组件的一种方式，适用场景：类似微博这种往下滚动的时候再加载内容
+
+  用法：
+
+  ```jsx
+  import React, { Component, lazy, Suspense } from 'react';
+
+  render() {
+      console.log('render');
+      return (
+        <div>
+          <div>another component!</div>
+          <Suspense fallback={<div>Loading......</div>}>
+            <p>I am Load Now!</p>
+          </Suspense>
+        </div>
+      );
+    }
+  ```
+
+  Lazy组件的生命周期：
+
+  ![生命周期]('./src/images/lazy.png')
+
+  ##### 22. React Hooks（demo见Hook）
+
+  这个目前（2018.12.12）还是一个alpha版本，不推荐在项目中使用，要求相关版本如下：
+
+  react： "^16.7.0-alpha.2",
+
+  react-dom: "^16.7.0-alpha.2"
+
+  Hooks只能定义函数组件，不能定义class组件，所以不能设置state，没有生命周期，定义方法如下：
+
+  ```jsx
+  import React, { useState } from 'react';
+
+  () => {
+    const [age, setAge] = useState('21');
+    const [name, setName] = useState('BR');
+   return (
+    	<p>Name: <input type="text" value={name} onChange={e => setName(e.target.value)} /></p>
+     )
+  }
+  ```
 
   ​
 

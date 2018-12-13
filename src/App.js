@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 // import Index from "./components/ListsAndKeys/Index";
 // import Index from './components/ReactClassVSFuncComponents/Index';
 // import Index from './components/ReactEventAndTwoWayDataBinding/Index';
@@ -15,7 +15,9 @@ import './App.css';
 // import Index from './components/Redux/ReactWithReduxComplex';
 // import Index from './components/Redux/ReduxCombineMultipleReducers';
 // import Index from './components/Redux/ReactReduxMiddleware';
-import Index from './components/Redux/ReactReduxThunk';
+// import Index from './components/Redux/ReactReduxThunk';
+import Index from './components/Memoize';
+// import Index from './components/LazyComponent';
 
 class App extends Component {
   render() {
