@@ -546,7 +546,7 @@ re-render的时候，ref中的回调连续执行2次
 
   ​
 
-  #####19. thunk（demo见ReactReduxThunk）
+  ##### 19. thunk（demo见ReactReduxThunk）
 
   thunk: 在js中的意思是把一个功能用函数包装起来，当调用这个函数的时候，返回并执行这个功能，举个例子：
 
